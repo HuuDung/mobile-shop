@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+
+  php: 
+    image: php-laravel:lastest
+    build: .
+    volumes: 
+      - ..:/var/www
+      - ./config/apache2.conf:/etc/apache2/apache2.conf
+      - ./config/app.conf:/etc/apache2/sites-enabled/app.conf
+      - ./config/php.ini:/etc/php/7.2/apache2/conf.d/custom.ini
+    env_file:
+      - ../.env
+    ports: 
+      - 9000:80
+
+  
