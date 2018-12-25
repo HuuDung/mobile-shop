@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Product::class, function (Faker $faker) {
     return [
-        'category_id' => rand(1,5),
+        'category_id' => rand(1, 5),
         'name' => $faker->name(),
         'description' => "Hiện nay cuộc sống ngày càng hiện đại và phát triển một cách chóng mặt mà mức sống của con
          người cũng ngày càng tăng cao nhu cầu tiêu dùng cũng khắt khe hơn bởi ai cũng mong muốn lựa chọn dòng sản phẩm

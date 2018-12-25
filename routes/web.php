@@ -18,9 +18,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.',
     'middleware' => ['auth', 'admin']], function () {
         Route::resource('member', 'MemberAdministrationController');
         Route::get('search-member', 'MemberAdministrationController@search')->name('member.search');
+        Route::post('member/{id}', 'MemberAdministrationController@restore')->name('member.restore');
         Route::resource('product-administration', 'ProductAdministrationController');
+        Route::post('product-administration/{id}', 'ProductAdministrationController@restore')->name('product-administration.restore');
         Route::get('search-product', 'ProductAdministrationController@search')->name('product.search');
         Route::resource('category', 'CategoryAdministrationController');
+        Route::post('category/{id}', 'CategoryAdministrationController@restore')->name('category.restore');
+        Route::group(['prefix' => 'specificate', 'namespace' => 'Specificate', 'as' => 'specificate.'], function () {
+            Route::resource('ram', 'RamController');
+            Route::post('ram/{id}', 'RamController@restore')->name('ram.restore');
+            Route::resource('cpu', 'CpuController');
+            Route::post('cpu/{id}', 'CpuController@restore')->name('cpu.restore');
+            Route::resource('system', 'SystemController');
+            Route::post('system/{id}', 'SystemController@restore')->name('system.restore');
+            Route::resource('storage', 'StorageController');
+            Route::post('storage/{id}', 'StorageController@restore')->name('storage.restore');
+        });
     });
 
 

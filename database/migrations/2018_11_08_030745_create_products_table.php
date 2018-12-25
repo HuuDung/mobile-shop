@@ -25,6 +25,12 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->integer('sold')->default(0);
 
+            $table->integer('ram_id');
+            $table->integer('system_id');
+            $table->integer('storage_id');
+            $table->integer('cpu_id');
+            $table->float('screen_size');
+            $table->float('weight');
             $table->softDeletes();
             $table->timestamps();
         });

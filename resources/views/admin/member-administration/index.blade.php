@@ -46,7 +46,7 @@
                     @foreach($users as $user)
                         <tr>
                             <td class="text-center">{{ $user->id }}</td>
-                            <td><a href="{{ route('admin.member.show' , $user->id) }}">{{ $user->name }}</a></td>
+                            <td><a href="{{ $user->deleted_at == null ? route('admin.member.show' , $user->id) : "#" }}">{{ $user->name }}</a></td>
                             <td><img src="{{ Storage::url($user->avatar) }}" alt=""></td>
                             <td>{{ $user->email }}</td>
                             <td class="text-center">
@@ -60,9 +60,15 @@
                             </td>
                             <td class="text-center">{{ $user->order }}</td>
                             <td class="text-center">
-                                {{Form::open(['method' => 'DELETE', 'route' => ['admin.member.destroy', $user->id]]) }}
-                                {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-                                {{ Form::close() }}
+                                @if($user->deleted_at == null)
+                                    {{Form::open(['method' => 'DELETE', 'route' => ['admin.member.destroy', $user->id]]) }}
+                                    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                    {{ Form::close() }}
+                                @else
+                                    {{Form::open(['method' => 'POST', 'route' => ['admin.member.restore', $user->id]]) }}
+                                    {{ Form::submit('Restore', ['class' => 'btn btn-primary']) }}
+                                    {{ Form::close() }}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

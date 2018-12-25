@@ -18,20 +18,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id','desc')->paginate(12);
-        $categories = Category::all();
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
+        $products = Product::orderBy('id', 'desc')->paginate(12);
         $data = [
             'products' => $products,
-            'categories' => $categories,
             'title' => "Home",
-            'cart' => $cart,
         ];
         return view('home', $data);
     }
@@ -39,20 +29,13 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $categories = Category::all();
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
+
         if ($request->category != null) {
             $products = Product::where('category_id', $request->category)
-                ->where('name', 'like', '%' . $request->content . '%')->orderBy('id','desc')
+                ->where('name', 'like', '%' . $request->content . '%')->orderBy('id', 'desc')
                 ->paginate(12);
         } else {
-            $products = Product::where('name', 'like', '%' . $request->content . '%')->orderBy('id','desc')
+            $products = Product::where('name', 'like', '%' . $request->content . '%')->orderBy('id', 'desc')
                 ->paginate(12);
         }
         if ($products->count() == 0) {
@@ -60,16 +43,12 @@ class HomeController extends Controller
                 'products' => $products,
                 'status' => false,
                 'title' => "Result",
-                'categories' => $categories,
-                'cart' => $cart,
             ];
         } else {
             $data = [
                 'products' => $products,
                 'status' => true,
                 'title' => "Result",
-                'categories' => $categories,
-                'cart' => $cart,
             ];
         }
         return view('home', $data);
@@ -80,18 +59,37 @@ class HomeController extends Controller
         $costMin = $request->costMin;
         $costMax = $request->costMax;
         $category = $request->category;
-        if ($costMax != null || $costMin != null || $category != null) {
+        $ram = $request->ram;
+        $system = $request->system;
+        $cpu = $request->cpu;
+        $storage = $request->storage;
+
+        if ($costMax != null || $costMin != null || $category != null
+            || $ram != null || $system != null || $cpu != null || $storage != null )
+        {
             $products = Product::where('cost', '>', 0);
             if ($costMin != null) {
-                $products =$products->where('cost', '>=', $costMin);
+                $products = $products->where('cost', '>=', $costMin);
             }
             if ($costMax != null) {
-                $products =$products->where('cost', '<=', $costMax);
+                $products = $products->where('cost', '<=', $costMax);
             }
             if ($category != null) {
-                $products =$products->where('category_id', $category);
+                $products = $products->where('category_id', $category);
             }
-            $products=$products->orderBy('id','desc');
+            if ($ram != null) {
+                $products = $products->where('ram_id', $ram);
+            }
+            if ($storage != null) {
+                $products = $products->where('storage_id', $storage);
+            }
+            if ($system != null) {
+                $products = $products->where('system_id', $system);
+            }
+            if ($cpu != null) {
+                $products = $products->where('cpu_id', $cpu);
+            }
+            $products = $products->orderBy('id', 'desc');
             $products = $products->paginate(12);
             $categories = Category::all();
             $cart = 0;
@@ -106,10 +104,14 @@ class HomeController extends Controller
                 'categories' => $categories,
                 'title' => "Home",
                 'cart' => $cart,
-                'filterParams'=>[
+                'filterParams' => [
                     'costMin' => $costMin,
                     'costMax' => $costMax,
                     'category' => $category,
+                    'ram' => $ram,
+                    'cpu' => $cpu,
+                    'storage' => $storage,
+                    'system' => $system,
                 ],
             ];
             return view('home', $data);

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="{{ route('home') }}" class="navbar-brand"><b>Gốm Sứ</b></a>
+                <a href="{{ route('home') }}" class="navbar-brand"><b>Shop Mobile</b></a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#navbar-collapse">
                     <i class="fa fa-bars"></i>
@@ -38,21 +38,48 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tool<span
                                             class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
+                                    {{--Member--}}
                                     <li><a href="{{ route('admin.member.index') }}"><i class="fa fa-users"></i>
                                             Members</a>
                                     </li>
+                                    {{--Category--}}
                                     <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-database"></i>
                                             Categories</a>
                                     </li>
                                     <li><a href="{{ route('admin.category.create') }}"><i class="fa fa-pencil"></i>
-                                            Create Category</a>
+                                            Create Category</a></li>
+                                    {{--Product--}}
                                     <li><a href="{{ route('admin.product-administration.index') }}"><i
                                                     class="fa fa-database"></i>
                                             Products</a>
                                     </li>
-                                    <li><a href="{{ route('admin.product-administration.create') }}"><i
+                                    <li><a href="{{ route('admin.product-administration.create') }}"><i class="fa fa-pencil"></i>
+                                            Create Product</a></li>
+                                    {{--Rams--}}
+                                    <li><a href="{{ route('admin.specificate.ram.index') }}"><i class="fa fa-database"></i>
+                                            Rams</a>
+                                    </li>
+                                    <li><a href="{{ route('admin.specificate.ram.create') }}"><i
                                                     class="fa fa-pencil"></i>
-                                            Create Product</a>
+                                            Create Ram</a></li>
+                                    {{--CPU--}}
+                                    <li><a href="{{ route('admin.specificate.cpu.index') }}"><i class="fa fa-database"></i>
+                                            CPUs</a>
+                                    </li>
+                                    <li><a href="{{ route('admin.specificate.cpu.create') }}"><i class="fa fa-pencil"></i>
+                                            Create CPU</a></li>
+                                    {{--System--}}
+                                    <li><a href="{{ route('admin.specificate.system.index') }}"><i class="fa fa-database"></i>
+                                            Systems</a>
+                                    </li>
+                                    <li><a href="{{ route('admin.specificate.system.create') }}"><i class="fa fa-pencil"></i>
+                                            Create System</a></li>
+                                    {{--Storage--}}
+                                    <li><a href="{{ route('admin.specificate.storage.index') }}"><i class="fa fa-database"></i>
+                                            Storages</a>
+                                    </li>
+                                    <li><a href="{{ route('admin.specificate.storage.create') }}"><i class="fa fa-pencil"></i>
+                                            Create Storage</a></li>
                                 </ul>
                             </li>
                         </ul>

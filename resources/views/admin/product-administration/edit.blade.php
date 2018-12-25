@@ -49,6 +49,62 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="system">System:</label>
+                                <select name="system" class="form-control ">
+                                    @foreach($systems as $system)
+                                        <option value="{{ $system->id }}"
+                                                @if($system->id == $product->system_id) selected @endif>{{ $product->system['system'] }}</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="screen-size">Screen size("):</label>
+                                <input type="text" class="form-control text-left" name="screenSize"
+                                       value="{{ old('screenSize', $product->screen_size) }}"
+                                       placeholder="Screen size.." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cpu">CPU:</label>
+                                <select name="cpu" class="form-control ">
+                                    @foreach($cpus as $cpu)
+                                        <option value="{{ $cpu->id }}"
+                                            @if($cpu->id == $product->cpu_id) selected @endif
+                                            >{{ $product->cpu['cpu'] }}</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ram">Ram:</label>
+                                <select name="ram" class="form-control ">
+                                    @foreach($rams as $ram)
+                                        <option value="{{ $ram->id }}"
+                                            @if($ram->id == $product->ram_id) selected @endif
+                                            >{{ $product->ram['ram'] }} Gb</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storage">Storage:</label>
+                                <select name="storage" class="form-control ">
+                                    @foreach($storages as $storage)
+                                        <option value="{{ $storage->id }}"
+                                            @if($storage->id == $product->storage_id) selected @endif
+                                            >{{ $product->storage['storage'] }} Gb</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Weight(g):</label>
+                                <input type="text" class="form-control text-left" name="weight"
+                                       value="{{ old('weight', $product->weight) }}" placeholder="Weight.." required>
+                            </div>
+                            <div class="form-group">
                                 <label for="cost">Cost:</label>
                                 <input type="number" class="form-control text-left" name="cost"
                                        value="{{ old('cost', $product->cost) }}" required>
@@ -75,7 +131,8 @@
                                                 class="fa fa-map-marker margin-r-5"></i>Description:</label>
 
                                 </div>
-                                <textarea name="description"  class="form-control rounded-0" rows="10">{{ nl2br($product->description) }}</textarea>
+                                <textarea name="description" class="form-control rounded-0"
+                                          rows="10">{{ nl2br($product->description) }}</textarea>
 
                                 <!-- /.input group -->
                             </div>

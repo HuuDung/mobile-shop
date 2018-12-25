@@ -29,6 +29,5 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'bát đũa',
                 'description'=>'bát đũa',
             ]);
-
     }
 }

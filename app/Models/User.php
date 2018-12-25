@@ -45,6 +45,7 @@ class User extends Authenticatable
         'avatar',
         'admin',
         'balence',
+        'phone_number',
     ];
     protected $dates = [
         'created_at',

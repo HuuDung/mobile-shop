@@ -22,21 +22,11 @@ class ProductAdministrationController extends Controller
      */
     public function index()
     {
-        $product = Product::orderBy('id','desc')->paginate(5);
-        $categories = Category::all();
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
+        $product = Product::withTrashed()->orderBy('id', 'desc')->paginate(12);
         $data = [
 
             'products' => $product,
-            'categories' => $categories,
             'title' => "Product Administration",
-            'cart' => $cart,
         ];
         return view('admin.product-administration.index', $data);
     }
@@ -49,18 +39,8 @@ class ProductAdministrationController extends Controller
     public function create()
     {
         //
-        $categories = Category::all();
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => "Create Product",
-            'categories' => $categories,
-            'cart' => $cart,
         ];
         return view('admin.product-administration.create', $data);
     }
@@ -93,6 +73,12 @@ class ProductAdministrationController extends Controller
             'name' => $request->name,
             'cost' => $request->cost,
             'category_id' => $request->category,
+            'system_id' => $request->system,
+            'ram_id' => $request->ram,
+            'storage_id' => $request->storage,
+            'cpu_id' => $request->cpu,
+            'weight' => (float)$request->weight,
+            'screen_size' => (float)$request->screenSize,
             'description' => $request->description,
             'quantity' => $request->quantity,
         ]);
@@ -110,17 +96,9 @@ class ProductAdministrationController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => "Show product",
             'product' => $product,
-            'cart' => $cart,
         ];
         return view('admin.product-administration.show', $data);
     }
@@ -135,19 +113,9 @@ class ProductAdministrationController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $categories = Category::all();
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'product' => $product,
-            'categories' => $categories,
             'title' => "Edit Product",
-            'cart' => $cart,
         ];
         return view('admin.product-administration.edit', $data);
     }
@@ -162,6 +130,7 @@ class ProductAdministrationController extends Controller
     public function update(UploadImageRequest $request, $id)
     {
         //
+
         $product = Product::findOrFail($id);
         if ($request->hasFile('image')) {
             $filename = $request->file('image')->getClientOriginalName();
@@ -179,6 +148,12 @@ class ProductAdministrationController extends Controller
             'name' => $request->name,
             'cost' => $request->cost,
             'category_id' => $request->category,
+            'system_id' => $request->system,
+            'ram_id' => $request->ram,
+            'storage_id' => $request->storage,
+            'cpu_id' => $request->cpu,
+            'weight' => (float)$request->weight,
+            'screen_size' => (float)$request->screenSize,
             'description' => $request->description,
             'quantity' => $request->quantity,
         ]);
@@ -200,22 +175,19 @@ class ProductAdministrationController extends Controller
         return redirect()->route('admin.product-administration.index');
     }
 
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->restore();
+        return redirect()->route('admin.product-administration.index');
+    }
+
     public function search(RequestValue $request)
     {
-        $categories = Category::all();
-
         $category = $request->category;
         $costMin = $request->costMin;
         $costMax = $request->costMax;
         $content = $request->content;
-
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
 
         $products = Product::where('cost', '>', 0);
         if ($costMin != null) {
@@ -234,13 +206,11 @@ class ProductAdministrationController extends Controller
             $products = $products->where('id', 'like', '%' . $content . '%')
                 ->orWhere('name', 'like', '%' . $content . '%');
         }
-        $products = $products->paginate(5);
+        $products = $products->paginate(12);
         $data = [
 
             'products' => $products,
-            'categories' => $categories,
             'title' => "Product Administration",
-            'cart' => $cart,
             'filterParams' => [
                 'content' => $content,
                 'costMin' => $costMin,

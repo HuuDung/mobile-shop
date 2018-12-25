@@ -91,7 +91,7 @@
                 <div class="col-md-6">
                     <input id="phone" type="text"
                            class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"
-                           name="phone" value="{{ old('phone') }}" placeholder="Phone number" required autofocus>
+                           name="phone" value="{{ old('phone', $user->phone_number) }}" placeholder="Phone number" required autofocus>
                     @if ($errors->has('phone'))
                         <span class="invalid-feedback" role="alert">
                             <strong class="text-danger">{{ $errors->first('phone') }}</strong>

@@ -30,6 +30,7 @@ class UploadImageRequest extends FormRequest
             'avatar' => 'mimes:jpeg,jpg,png|max:1000',
             'cost' => new Value(),
             'quantity' => new Value(),
+            'phone' => 'numeric|nullable',
         ];
     }
 }

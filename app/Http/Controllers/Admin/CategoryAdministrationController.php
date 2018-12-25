@@ -16,18 +16,10 @@ class CategoryAdministrationController extends Controller
     public function index()
     {
         //
-        $category = Category::paginate(5);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
+        $category = Category::withTrashed()->paginate(12);
         $data = [
             'title' => 'Categories',
             'categories' => $category,
-            'cart' => $cart,
         ];
         return view('admin.category-administration.index', $data);
     }
@@ -40,16 +32,8 @@ class CategoryAdministrationController extends Controller
     public function create()
     {
         //
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => "Create Category",
-            'cart' => $cart,
         ];
         return view('admin.category-administration.create', $data);
     }
@@ -82,17 +66,9 @@ class CategoryAdministrationController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => "Show Category",
             'category' => $category,
-            'cart' => $cart,
         ];
         return view('admin.category-administration.show', $data);
     }
@@ -107,17 +83,9 @@ class CategoryAdministrationController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => "Edit Category",
             'category' => $category,
-            'cart' => $cart,
         ];
         return view('admin.category-administration.edit', $data);
     }
@@ -152,6 +120,13 @@ class CategoryAdministrationController extends Controller
         //
         $category = Category::findOrFail($id);
         $category->delete();
+        return redirect()->route('admin.category.index');
+    }
+
+    public function restore($id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        $category->restore();
         return redirect()->route('admin.category.index');
     }
 }

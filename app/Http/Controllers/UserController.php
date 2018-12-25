@@ -22,17 +22,9 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail(Auth::id());
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'user' => $user,
             'title' => "Profile",
-            'cart' => $cart,
         ];
         return view('users.index', $data);
     }
@@ -47,17 +39,9 @@ class UserController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'user' => $user,
             'title' => "Edit Profile",
-            'cart' => $cart,
         ];
         return view('users.edit', $data);
     }
@@ -72,7 +56,6 @@ class UserController extends Controller
 
     public function update(UploadImageRequest $request, $id)
     {
-        //
         $user = User::findOrFail($id);
         if ($request->hasFile('avatar')) {
             $filename = $request->file('avatar')->getClientOriginalName();
@@ -93,6 +76,7 @@ class UserController extends Controller
         $user->update([
             'gender' => $request->gender,
             'name' => $request->name,
+            'phone_number' => $request->phone,
             'location' => $request->location,
             'notes' => $request->notes,
         ]);
@@ -102,39 +86,17 @@ class UserController extends Controller
 
     public function addBalance()
     {
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'title' => 'Balance',
-            'cart' =>$cart,
         ];
         return view('users.balance', $data);
     }
     public function getFormChangePassWord()
     {
-//        echo auth()->user()->id;
-//        $data = [
-//            'user' => $user,
-//            'title' => "Edit Profile",
-//            'cart' => $cart,
-//        ];
         $user = User::findOrFail(auth()->user()->id);
-        $cart = 0;
-        if (session()->has('product')) {
-            $data = session()->get('product');
-            foreach ($data as $key => $value) {
-                $cart += $value['quantity'];
-            }
-        }
         $data = [
             'user' => $user,
             'title' => "Edit Profile",
-            'cart' => $cart,
         ];
         return view('users.changPasswordForm', $data);
     }

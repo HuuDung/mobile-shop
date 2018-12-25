@@ -21,7 +21,6 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th class="text-center"></th>
-                <th></th>
             </tr>
             </thead>
             <body>
@@ -29,14 +28,21 @@
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>
-                        <a href="{{ route('admin.category.show', $category->id) }}">{{ $category->name }}</a>
+                        <a href="{{ $category->deleted_at == null ? route('admin.category.show', $category->id) : "#"}}">{{ $category->name }}</a>
                     </td>
                     <td>{{ nl2br($category->description) }}</td>
                     <td class="text-center">
-                        {{Form::open(['method' => 'DELETE', 'route' => ['admin.category.destroy', $category->id]]) }}
-                        {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-                        {{ Form::close() }}
+                        @if($category->deleted_at == null)
+                            {{Form::open(['method' => 'DELETE', 'route' => ['admin.category.destroy', $category->id]]) }}
+                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                            {{ Form::close() }}
+                        @else
+                            {{Form::open(['method' => 'POST', 'route' => ['admin.category.restore', $category->id]]) }}
+                            {{ Form::submit('Restore', ['class' => 'btn btn-primary']) }}
+                            {{ Form::close() }}
+                        @endif
                     </td>
+
                 </tr>
             @endforeach
             </body>

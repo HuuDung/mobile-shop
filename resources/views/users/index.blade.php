@@ -49,6 +49,13 @@
                             </li>
                         </ul>
                         <div class="form-group">
+                            <label for="phone"><i class="fa fa-phone margin-r-5"></i>Số điện thoại:</label>
+                            <input type="text" class="form-control pull-right" name="phone"
+                                   value="{{ $user->phone_number }}"
+                                   placeholder="Phone number" readonly>
+                            <!-- /.input group -->
+                        </div>
+                        <div class="form-group">
                             <label for="gender">Giới tính:</label>
                             <input type="text" class="form-control"
                                    @if($user->gender == \App\User::MALE) value="Male"

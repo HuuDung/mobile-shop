@@ -22,17 +22,42 @@
                             <img src="{{ Storage::url($product->image) }}" alt="Product image">
                         </div>
                         <div class="form-group">
-                            <label for="name">Product's name</label>
+                            <label for="name">Product's name:</label>
                             <input class="form-control text-left" type="text" name="name" value="{{ $product->name }}"
                                    placeholder="Name" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="category">Category</label>
+                            <label for="category">Category:</label>
                             <input type="text" class="form-control" name="category" value="{{ $product->category['name'] }}" readonly>
                         </div>
                         <div class="form-group">
+                            <label for="system">System:</label>
+                            <input type="text" class="form-control" name="system" value="{{ $product->system['system'] }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="screenSize">Screen Size:</label>
+                            <input type="text" class="form-control" name="screenSize" value="{{ $product->screen_size . "\"" }}  " readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpu">CPU:</label>
+                            <input type="text" class="form-control" name="cpu" value="{{ $product->cpu['cpu'] }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="ram">Ram:</label>
+                            <input type="text" class="form-control" name="ram" value="{{ $product->ram['ram'] }} Gb" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="storage">Storage</label>
+                            <input type="text" class="form-control" name="storage" value="{{ $product->storage['storage'] }} Gb" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <input type="text" class="form-control" name="weight" value="{{ $product->weight }}g" readonly>
+                        </div>
+
+                        <div class="form-group">
                             <label for="cost">Cost:</label>
-                            <input type="number" class="form-control text-left" name="cost" value="{{ $product->cost }}"
+                            <input type="text" class="form-control text-left" name="cost" value="{{ $product->cost ."\$"}}"
                                    readonly>
                         </div>
                         <div class="form-group">

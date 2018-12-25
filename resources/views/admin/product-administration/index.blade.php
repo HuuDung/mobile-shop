@@ -72,7 +72,7 @@
                         <th>Image</th>
                         <th>Category</th>
                         <th>Description</th>
-                        <th class="text-center">Cost</th>
+                        <th class="text-center">Cost($)</th>
                         <th class="text-center">Quantity</th>
                         <th class="text-center">Sold</th>
                         <th></th>
@@ -83,18 +83,26 @@
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>
-                                <a href="{{ route('admin.product-administration.show', $product->id) }}">{{ $product->name }}</a>
+                                <a href="{{ $product->deleted_at == null ? route('admin.product-administration.show', $product->id) : "#"}}">{{ $product->name }}</a>
                             </td>
                             <td><img src="{{ Storage::url($product->image) }}" alt=""></td>
-                            <td>{{ $product->category['name'] }}</td>
+                            <td>
+                                <a href="{{ $product->category['deleted_at'] == null ? route('admin.category.show', $product->category['id']) : "#"}}">{{ $product->category['name'] }}</a>
+                            </td>
                             <td>{{ nl2br($product->description) }}</td>
                             <td class="text-center">{{ $product->cost }}</td>
                             <td class="text-center">{{ $product->quantity }}</td>
                             <td class="text-center">{{ $product->sold }}</td>
                             <td class="text-center">
-                                {{Form::open(['method' => 'DELETE', 'route' => ['admin.product-administration.destroy', $product->id]]) }}
-                                {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-                                {{ Form::close() }}
+                                @if($product->deleted_at == null)
+                                    {{Form::open(['method' => 'DELETE', 'route' => ['admin.product-administration.destroy', $product->id]]) }}
+                                    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                    {{ Form::close() }}
+                                @else
+                                    {{Form::open(['method' => 'POST', 'route' => ['admin.product-administration.restore', $product->id]]) }}
+                                    {{ Form::submit('Restore', ['class' => 'btn btn-primary']) }}
+                                    {{ Form::close() }}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

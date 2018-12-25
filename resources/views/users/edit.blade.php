@@ -52,6 +52,19 @@
                                 </li>
                             </ul>
                             <div class="form-group">
+                                <label for="phone"><i class="fa fa-map-marker margin-r-5"></i>Số điện thoại:</label>
+                                <input type="text" class="form-control pull-right" name="phone"
+                                       value="{{ old('phone', $user->phone_number )}}"
+                                       placeholder="Phone number..">
+                            </div>
+                            <div class="form-group">
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback text-danger" role="alert">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                                @endif
+                            </div>
+                            <div class="form-group">
                                 <label for="gender">Giới tính:</label>
                                 <select name="gender" id="" class="form-control">
                                     <option value="{{ \App\User::MALE }}"
@@ -66,27 +79,27 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="bỉthday"><i class="fa fa-calendar margin-r-5"></i>Ngày sinh:</label>
+                                <label for="birthday"><i class="fa fa-calendar margin-r-5"></i>Ngày sinh:</label>
                                 <div class="input-group date">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <input type="text" class="form-control pull-right" name="birthday" id="datepicker"
-                                           value="{{ $user->birthday }}">
+                                           value="{{ old('birthday', $user->birthday) }}">
                                 </div>
                                 <!-- /.input group -->
                             </div>
                             <div class="form-group">
                                 <label for="location"><i class="fa fa-map-marker margin-r-5"></i>Địa chỉ:</label>
                                 <input type="text" class="form-control pull-right" name="location"
-                                       value="{{ $user->location }}"
+                                       value="{{ old('location', $user->location) }}"
                                        placeholder="Location">
                                 <!-- /.input group -->
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-file-text-o margin-r-5"></i>Ghi chú:</label>
                                 <input type="text" class="form-control pull-right" name="notes"
-                                       value="{{ $user->notes }}"
+                                       value="{{ old('notes',$user->notes) }}"
                                        placeholder="Notes">
                                 <!-- /.input group -->
                             </div>

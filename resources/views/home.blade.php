@@ -36,6 +36,7 @@
                         </span>
                         @endif
                     </div>
+
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select name="category" id="category" class="form-control">
@@ -51,6 +52,71 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="system">System</label>
+                        <select name="system" id="system" class="form-control">
+                            <option value="">Choose..</option>
+                            @foreach($systems as $system)
+                                <option value="{{ $system->id }}"
+                                        @if(isset($filterParams))
+                                        @if($system->id == $filterParams['system'])
+                                        selected
+                                        @endif
+                                        @endif>{{ $system->system }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpu">CPU</label>
+                        <select name="cpu" id="cpu" class="form-control">
+                            <option value="">Choose..</option>
+                            @foreach($cpus as $cpu)
+                                <option value="{{ $cpu->id }}"
+                                        @if(isset($filterParams))
+                                        @if($cpu->id == $filterParams['cpu'])
+                                        selected
+                                        @endif
+                                        @endif>{{ $cpu->cpu }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ram">Ram</label>
+                        <select name="ram" id="ram" class="form-control">
+                            <option value="">Choose..</option>
+                            @foreach($rams as $ram)
+                                <option value="{{ $ram->id }}"
+                                        @if(isset($filterParams))
+                                        @if($ram->id == $filterParams['ram'])
+                                        selected
+                                        @endif
+                                        @endif>{{ $ram->ram }} Gb
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="storage">Storage</label>
+                        <select name="storage" id="storage" class="form-control">
+                            <option value="">Choose..</option>
+                            @foreach($storages as $storage)
+                                <option value="{{ $storage->id }}"
+                                        @if(isset($filterParams))
+                                        @if($storage->id == $filterParams['storage'])
+                                        selected
+                                        @endif
+                                        @endif>{{ $storage->storage }} Gb
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </div>
@@ -110,7 +176,11 @@
         <div class="text-right">
             {{ $products->appends(['costMin'=> (isset($filterParams))?old('costMin', $filterParams['costMin']):'',
                                     'costMax'=> (isset($filterParams))?old('costMax', $filterParams['costMax']):'',
-                                    'category'=> (isset($filterParams))?old('category', $filterParams['category']):''
+                                    'category'=> (isset($filterParams))?old('category', $filterParams['category']):'',
+                                    'ram'=> (isset($filterParams))?old('ram', $filterParams['ram']):'',
+                                    'system'=> (isset($filterParams))?old('system', $filterParams['system']):'',
+                                    'storage'=> (isset($filterParams))?old('storage', $filterParams['storage']):'',
+                                    'cpu'=> (isset($filterParams))?old('cpu', $filterParams['cpu']):'',
                                     ])->links() }}
         </div>
     </section>
