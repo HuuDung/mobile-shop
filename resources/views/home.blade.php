@@ -141,7 +141,7 @@
                             </div>
                             <div class="product-content">
                                 <p>
-                                    {{ $product->name }}
+                                    {{ $product->name ." (". $product->storage['storage']. "Gb)" }}
                                 </p>
                                 <p>
                                     Giá tiền: {{ $product->cost }}$

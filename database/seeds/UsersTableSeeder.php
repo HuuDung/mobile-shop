@@ -15,6 +15,6 @@ class UsersTableSeeder extends Seeder
             factory(App\User::class, 1)->create(['admin'=>0,'name'=>'user_'.$i,'email'=>'user_'.$i.'@test.com']);
         }
 
-        factory(App\User::class, 1)->create(['admin'=>1,'name'=>'admin','email'=>'admin'.'@test.com']);
+        factory(App\User::class, 1)->create(['admin'=>1,'name'=>'admin','email'=>'admin'.'@test.com','phone_number' => '0966668888']);
     }
 }

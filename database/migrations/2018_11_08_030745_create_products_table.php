@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->float('rate')->default(0);
             $table->integer('category_id');
             $table->longText('description')->nullable();
-            $table->integer('cost');
+            $table->double('cost');
             $table->string('image')->default('products/default.jpg');
             $table->integer('quantity');
             $table->integer('sold')->default(0);

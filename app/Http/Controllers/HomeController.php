@@ -65,8 +65,7 @@ class HomeController extends Controller
         $storage = $request->storage;
 
         if ($costMax != null || $costMin != null || $category != null
-            || $ram != null || $system != null || $cpu != null || $storage != null )
-        {
+            || $ram != null || $system != null || $cpu != null || $storage != null ) {
             $products = Product::where('cost', '>', 0);
             if ($costMin != null) {
                 $products = $products->where('cost', '>=', $costMin);

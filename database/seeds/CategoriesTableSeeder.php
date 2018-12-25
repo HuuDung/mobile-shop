@@ -14,20 +14,20 @@ class CategoriesTableSeeder extends Seeder
         //
 
             factory(\App\Models\Category::class, 1)->create([
-                'name'=>'ấm chén',
-                'description'=>'ấm chén',
+                'name'=>'Oppo',
+                'description'=>'Điện thoại Đài Loan',
             ]);
             factory(\App\Models\Category::class, 1)->create([
-                'name'=>'bình',
-                'description'=>'bình để đựng nước',
+                'name'=>'Samsung',
+                'description'=>'Điện thoại Hàn Quốc',
             ]);
             factory(\App\Models\Category::class, 1)->create([
-                'name'=>'ấm chén',
-                'description'=>'ấm chén',
+                'name'=>'Iphone',
+                'description'=>'Táo cắn dở',
             ]);
             factory(\App\Models\Category::class, 1)->create([
-                'name'=>'bát đũa',
-                'description'=>'bát đũa',
+                'name'=>'Huawei',
+                'description'=>'Điện thoại Trung Quốc',
             ]);
     }
 }

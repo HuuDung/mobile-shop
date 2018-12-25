@@ -31,33 +31,51 @@
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label for="name">Product's name</label>
-                                    <p>{{ $product->name }}</p>
+                                    <label for="name">Product's name:</label>
+                                    <input class="form-control text-left" type="text" name="name" value="{{ $product->name }}"
+                                           placeholder="Name" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category">Category</label>
-                                    <p>{{ $product->category['name'] }}</p>
+                                    <label for="category">Category:</label>
+                                    <input type="text" class="form-control" name="category" value="{{ $product->category['name'] }}" readonly>
                                 </div>
+                                <div class="form-group">
+                                    <label for="system">System:</label>
+                                    <input type="text" class="form-control" name="system" value="{{ $product->system['system'] }}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="screenSize">Screen Size:</label>
+                                    <input type="text" class="form-control" name="screenSize" value="{{ $product->screen_size . "\"" }}  " readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpu">CPU:</label>
+                                    <input type="text" class="form-control" name="cpu" value="{{ $product->cpu['cpu'] }}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ram">Ram:</label>
+                                    <input type="text" class="form-control" name="ram" value="{{ $product->ram['ram'] }} Gb" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="storage">Storage</label>
+                                    <input type="text" class="form-control" name="storage" value="{{ $product->storage['storage'] }} Gb" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Weight</label>
+                                    <input type="text" class="form-control" name="weight" value="{{ $product->weight }}g" readonly>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="cost">Cost:</label>
-                                    <p >{{ $product->cost }}</p>
+                                    <input type="text" class="form-control text-left" name="cost" value="{{ $product->cost ."\$"}}"
+                                           readonly>
                                 </div>
-                                <div class="form-group">
-                                    <div>
-                                        <label for="description"><i
-                                                    class="fa  margin-r-5"></i>Description:</label>
-
-                                    </div>
-                                    <p name="description" cols="83" readonly
-                                              rows="10">{{ nl2br($product->description) }}</p>
-
                                     <!-- /.input group -->
                                     <input type="hidden" value="{{$product->id}}" name="id">
                                     <input type="hidden" value="{{$product->id}}" name="product[{{$product->id}}][id]">
                                     <input type="hidden" value="{{$product->name}}" name="product[{{$product->id}}][name]">
                                     <input type="hidden" value="{{$product->cost}}" name="product[{{$product->id}}][cost]">
                                     <input type="hidden" value={{ 1 }} name="product[{{$product->id}}][quantity]">
-                                </div>
+
                                 <div>
                                     <div class="text-center">
                                         <button class="btn btn-primary  {{ ($product->quantity-$product->sold) == 0 ? 'hidden' :'' }}"

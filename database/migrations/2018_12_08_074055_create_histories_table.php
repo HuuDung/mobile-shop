@@ -21,7 +21,7 @@ class CreateHistoriesTable extends Migration
             $table->string('phone');
             $table->integer('type');
             $table->integer('status');
-            $table->integer('amount');
+            $table->double('amount');
             $table->softDeletes();
             $table->timestamps();
         });

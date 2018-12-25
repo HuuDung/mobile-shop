@@ -188,6 +188,10 @@ class ProductAdministrationController extends Controller
         $costMin = $request->costMin;
         $costMax = $request->costMax;
         $content = $request->content;
+        $ram = $request->ram;
+        $system = $request->system;
+        $cpu = $request->cpu;
+        $storage = $request->storage;
 
         $products = Product::where('cost', '>', 0);
         if ($costMin != null) {
@@ -206,6 +210,18 @@ class ProductAdministrationController extends Controller
             $products = $products->where('id', 'like', '%' . $content . '%')
                 ->orWhere('name', 'like', '%' . $content . '%');
         }
+        if ($ram != null) {
+            $products = $products->where('ram_id', $ram);
+        }
+        if ($storage != null) {
+            $products = $products->where('storage_id', $storage);
+        }
+        if ($system != null) {
+            $products = $products->where('system_id', $system);
+        }
+        if ($cpu != null) {
+            $products = $products->where('cpu_id', $cpu);
+        }
         $products = $products->paginate(12);
         $data = [
 
@@ -216,6 +232,10 @@ class ProductAdministrationController extends Controller
                 'costMin' => $costMin,
                 'costMax' => $costMax,
                 'category' => $category,
+                'ram' => $ram,
+                'cpu' => $cpu,
+                'storage' => $storage,
+                'system' => $system,
             ]
         ];
         return view('admin.product-administration.index', $data);
