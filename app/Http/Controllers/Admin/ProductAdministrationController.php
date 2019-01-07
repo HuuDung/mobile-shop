@@ -61,7 +61,7 @@ class ProductAdministrationController extends Controller
             $type = $request->file('image')->getClientOriginalExtension();
             $url = 'products/images/' . $id . '/' . $filename;
 
-            $image = Image::make($request->file('image'))->resize(150, 150)->encode($type);
+            $image = Image::make($request->file('image'))->resize(400, 400)->encode($type);
             Storage::disk('s3')->put($url, (string)$image, 'public');
 
 
@@ -137,7 +137,7 @@ class ProductAdministrationController extends Controller
             $type = $request->file('image')->getClientOriginalExtension();
             $url = 'products/images/' . $product->id . '/' . $filename;
 
-            $image = Image::make($request->file('image'))->resize(150, 150)->encode($type);
+            $image = Image::make($request->file('image'))->resize(400, 400)->encode($type);
             Storage::disk('s3')->put($url, (string)$image, 'public');
 
             $product->update([
