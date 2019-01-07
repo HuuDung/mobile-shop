@@ -53,7 +53,7 @@
                                 <select name="system" class="form-control ">
                                     @foreach($systems as $system)
                                         <option value="{{ $system->id }}"
-                                                @if($system->id == $product->system_id) selected @endif>{{ $product->system['system'] }}</option>
+                                                @if($system->id == $product->system_id) selected @endif>{{ $system->system }}</option>
 
                                     @endforeach
                                 </select>
@@ -69,8 +69,8 @@
                                 <select name="cpu" class="form-control ">
                                     @foreach($cpus as $cpu)
                                         <option value="{{ $cpu->id }}"
-                                            @if($cpu->id == $product->cpu_id) selected @endif
-                                            >{{ $product->cpu['cpu'] }}</option>
+                                                @if($cpu->id == $product->cpu_id) selected @endif
+                                        >{{ $cpu->cpu }}</option>
 
                                     @endforeach
                                 </select>
@@ -81,8 +81,9 @@
                                 <select name="ram" class="form-control ">
                                     @foreach($rams as $ram)
                                         <option value="{{ $ram->id }}"
-                                            @if($ram->id == $product->ram_id) selected @endif
-                                            >{{ $product->ram['ram'] }} Gb</option>
+                                                @if($ram->id == $product->ram_id) selected @endif
+                                        >{{ $ram->ram }} Gb
+                                        </option>
 
                                     @endforeach
                                 </select>
@@ -93,8 +94,9 @@
                                 <select name="storage" class="form-control ">
                                     @foreach($storages as $storage)
                                         <option value="{{ $storage->id }}"
-                                            @if($storage->id == $product->storage_id) selected @endif
-                                            >{{ $product->storage['storage'] }} Gb</option>
+                                                @if($storage->id == $product->storage_id) selected @endif
+                                        >{{ $storage->storage }} Gb
+                                        </option>
 
                                     @endforeach
                                 </select>

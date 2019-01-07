@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
             $systems = System::all();
             $storage = Storage::all();
             $categories = Category::all();
-
             $view->with([
                 'cpus' => $cpus,
                 'rams' => $rams,
