@@ -136,7 +136,7 @@
                         <div class="col-md-3 text-center">
                             <div class="product-image">
                                 <a href="{{ route('product.show', $product->id) }}">
-                                    <img src="{{ Storage::url($product->image) }}" alt="">
+                                    <img src="{{ Storage::url($product->image) }}" alt="" style="max-width: 100%;">
                                 </a>
                             </div>
                             <div class="product-content">
