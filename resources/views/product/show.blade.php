@@ -69,6 +69,16 @@
                                     <input type="text" class="form-control text-left" name="cost" value="{{ $product->cost ."\$"}}"
                                            readonly>
                                 </div>
+                                <div class="form-group">
+                                    <div>
+                                        <label for="description"><i
+                                                    class="fa fa-map-marker margin-r-5"></i>Description:</label>
+
+                                    </div>
+                                    <textarea name="description" class="form-control rounded-0" readonly
+                                              rows="10">{{ nl2br($product->description) }}</textarea>
+
+                                </div>
                                     <!-- /.input group -->
                                     <input type="hidden" value="{{$product->id}}" name="id">
                                     <input type="hidden" value="{{$product->id}}" name="product[{{$product->id}}][id]">
